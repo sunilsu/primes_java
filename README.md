@@ -32,7 +32,6 @@ This is a spring boot application with maven support.
 docker run --name my-redis -p 6379:6379 -d redis
 
 # Start the application
-```
 mvn spring-boot:run
 
 
