@@ -11,7 +11,7 @@ docker run --name my-redis -p 6379:6379 -d redis
 Running on a windows machine, I had to connect to the container at a specific IP provided by my virtual box and I have used that in the code.
 
 * Since this project is about handling long running processes, I have used a task queue to asynchronously handle these tasks outside of the regular HTTP request-response cycles. I have used Spring Asynchronous and ThreadPoolExecutor to process tasks in background. The post request is handed off to a task executor and returns a job id that can be used for querying the status.
-Unlike the python implementation which implemented this as a distributed queue, here, I have implemented a in process task queue. I wanted to explore `redisson` package that has distributed queue implementation, but do not have the time.
+Unlike the python implementation which implemented this as a distributed queue, here, I have implemented an in-process task queue. I wanted to explore `redisson` package that has distributed queue implementation, but do not have the time.
 
 * I have used Spring Data and RedisTemplate to interface with Redis cache. The post request parameters are used as keys in the cache to keep track of which requests are duplicate.
     * This solution is not ideal for the problem at hand. To get a list of primes, a better solution is to look at the overlapping intervals between the existing keys in cache and the request, and make use of cache for all overlapping intervals. This is complicated and I have not attempted to do it.
