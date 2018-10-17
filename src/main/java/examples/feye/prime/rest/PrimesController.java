@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import examples.feye.prime.dao.PrimesDAO;
 import examples.feye.prime.task.PrimesTask;
 
+/***
+ * 
+ * Entrypoint for POST/GET requests
+ *
+ */
 @RestController
 public class PrimesController {
 

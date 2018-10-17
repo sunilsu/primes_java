@@ -15,6 +15,11 @@ import examples.feye.prime.rest.PrimesListNoContentException;
 
 @Repository
 @Transactional
+/***
+ * 
+ * DAO to access Redis <key,value> data
+ *
+ */
 public class PrimesDAO {
 
 	private static final String PREFIX = "primes";

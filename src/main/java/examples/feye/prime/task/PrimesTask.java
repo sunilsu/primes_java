@@ -15,6 +15,11 @@ import org.springframework.stereotype.Service;
 
 import examples.feye.prime.dao.PrimesDAO;
 
+/***
+ * 
+ * Async Service to handle long running jobs in background
+ *
+ */
 @Service
 public class PrimesTask {
 	
@@ -41,7 +46,9 @@ public class PrimesTask {
 	public void startPrimesListTask(int startNum, int endNum, String jobId) {
 		log.info(startNum + ", " + endNum + ", " + jobId);
 		String result = null;
+		// a synchronized list to save primes
 		List<Integer> primes = Collections.synchronizedList(new ArrayList<Integer>());
+		// count number of requests, so we can wait for them
 		CountDownLatch latch = new CountDownLatch(endNum - startNum + 1);
 		for (int i = startNum; i <= endNum; i++) {
 			// asyncExecutor.submit(new PrimeRunnable(i, primes));
@@ -56,8 +63,10 @@ public class PrimesTask {
 			});
 		}
 		try {
+			// wait for all tasks to complete
 			latch.await();
 			Collections.sort(primes);
+			// convert list of ints to String of ints comma separated
 			result = primes.stream().map(Object::toString).collect(Collectors.joining(", "));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

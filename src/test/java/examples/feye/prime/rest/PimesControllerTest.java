@@ -33,6 +33,10 @@ public class PimesControllerTest {
 	@MockBean
 	PrimesTask primesTask;
 
+	/***
+	 * Tests a 200 OK response when (start_num, end_num) is already in cache and jobId is returned
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetPrimesInCache() throws Exception {
 		String jobId = "abc123";
@@ -50,6 +54,10 @@ public class PimesControllerTest {
 
 	}
 	
+	/***
+	 * Test Http 200 response when a new (start_num, end_num) is received
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetPrimesNew() throws Exception {
 		String jobId = "abc123";
@@ -69,6 +77,11 @@ public class PimesControllerTest {
 
 	}
 	
+	/***
+	 * test HTTP 404 error when JOB ID is not found in cache
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetResult() throws Exception {
 		Mockito.when(primesDao.getResult(Mockito.anyString())).thenThrow(JobIdNotFoundException.class);
