@@ -12,15 +12,15 @@ import examples.feye.prime.dao.PrimesDAO;
 import examples.feye.prime.task.PrimesTask;
 
 @RestController
-public class PrimesRequest {
+public class PrimesController {
 
 	@Autowired
 	PrimesDAO primesDao;
 	
 	@Autowired
 	PrimesTask primesTask;
-
-	private final Logger log = LoggerFactory.getLogger(PrimesRequest.class);
+	
+	private final Logger log = LoggerFactory.getLogger(PrimesController.class);
 
 	@RequestMapping(value = "/primes", method = RequestMethod.POST)
 	public String getPrimes(@RequestParam("start_num") int startNum, @RequestParam("end_num") int endNum) {
